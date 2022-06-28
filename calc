@@ -1,0 +1,40 @@
+package com.company;
+import java.io.IOException;
+import java.util.Scanner;
+
+class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        String a;
+        String b;
+        String c;
+
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Input:");
+
+                a = sc.next();
+                b = sc.next();
+                c = sc.next();
+
+              if(a.equals("\n") || b.equals("\n") || c.equals("\n")) {
+                  throw new IOException("Введено неподходящее количество чисел!");
+                  //break;
+              }
+
+        sc.close();
+
+        Count built = new Count(a, b, c);
+        built.setFirst(Count.toArabicInteg(a));
+        built.setSign(b);
+        built.setSecond(Count.toArabicInteg(c));
+
+        int result = Count.calculation(Count.exchange(built.getFirst()), b, Count.exchange(Count.getSecond()));
+        built.setFirst(a);
+        built.setSecond(c);
+        Count.jar(built.getFirst(),Count.getSecond());
+        System.out.println("Output:\n" + Count.isRoman(result));
+    }
+}
